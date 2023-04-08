@@ -8,3 +8,8 @@ export class RegisterDto {
 }
 
 export type NewUserDto = Omit<RegisterDto, 'user_id'>
+
+export class AuthDto {
+    email: string
+    password: string
+}

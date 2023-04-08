@@ -1,5 +1,6 @@
 import { user_connect } from "../config/user.db"
 import { User } from "../models/user.model"
+import { AuthDto } from "../../types"
 
 export class UserRepository {
     _db: any = {}
@@ -26,5 +27,25 @@ export class UserRepository {
             // TODO log
             return error
         }
+    }
+
+    async login(dataLogin: AuthDto): Promise<string> {
+        let data: User
+
+        try {
+            data = await this._userRepository.findOne({
+                where: { 
+                    email: dataLogin.email, 
+                    password: dataLogin.password
+                }
+            })
+
+            if(!data) {
+                return "datos login incorrecto" //TODO 
+            } 
+        } catch(error) {
+            throw error
+        }
+        return data.user_id
     }
 }
