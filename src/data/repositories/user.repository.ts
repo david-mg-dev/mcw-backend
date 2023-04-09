@@ -1,6 +1,8 @@
 import { user_connect } from "../config/user.db"
 import { User } from "../models/user.model"
 import { AuthDto } from "../../types"
+import { encrypt } from "../../utils/bcrypt.handler"
+import { compare } from "bcrypt"
 
 export class UserRepository {
     _db: any = {}
@@ -21,6 +23,10 @@ export class UserRepository {
                 // TODO log
             }
 
+            const passHash = await encrypt(newUser.password)
+
+            newUser.password = passHash
+
             newUser = await this._userRepository.create(newUser)
             return newUser.user_id
         } catch (error) {
@@ -35,14 +41,18 @@ export class UserRepository {
         try {
             data = await this._userRepository.findOne({
                 where: { 
-                    email: dataLogin.email, 
-                    password: dataLogin.password
+                    email: dataLogin.email
                 }
             })
-
             if(!data) {
-                return "datos login incorrecto" //TODO 
+                return "email not found" //TODO 
             } 
+
+            const isValidPass = await compare(dataLogin.password, data.password)
+            if(!isValidPass) {
+                return "PASSWORD INCORRECT" //TODO
+            }
+
         } catch(error) {
             throw error
         }
