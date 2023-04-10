@@ -25,6 +25,16 @@ export class WalletServices {
         return walletPromise
     }
 
+    async addCryptoToWallet(dataWallet: Wallet): Promise<string> {
+        const body = await this._walletRepository.addCryptoToWallet(dataWallet).then(result => {
+            return result
+        }).catch(error => {
+            console.error(error)
+            throw error // TODO log
+        })
+        return body
+    }
+
     parseDto(wallet: Wallet): WalletDto {
         const walletDto: WalletDto = {
             wallet_id: wallet.dataValues.wallet_id,

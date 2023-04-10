@@ -23,8 +23,27 @@ export class WalletRepository {
             }) 
             return dataWallet 
         } catch (error) {
-            console.error(error)
+            console.error(error) // TODO
         }
         return []
+    }
+
+    async addCryptoToWallet(dataWallet: Wallet): Promise<string> {
+        try {
+            const existCrypto = await this._walletRepository.findOne({
+                where: { crypto_id: dataWallet.crypto_id }   
+            })
+
+            if(existCrypto) {
+                console.log('Esta crypto ya esta agregada') // TODO 
+            } else {
+                const newCryptoWallet = await this._walletRepository.create(dataWallet) 
+                console.log(newCryptoWallet)   // TODO  Por defecto amount=0
+            }
+            return dataWallet.user_id
+
+        } catch (error) {
+            return error // TODO
+        }
     }
 }

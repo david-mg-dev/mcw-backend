@@ -30,4 +30,6 @@ export class WalletDto {
     crypto?: CryptoDto
 }
 
-export type NewTransactionWalletDto = Omit<WalletDto, 'wallet_id'>
+export type NewWalletDto = Omit<WalletDto, 'wallet_id'>
+
+ 

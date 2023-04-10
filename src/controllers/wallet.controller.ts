@@ -14,5 +14,16 @@ export const WalletController =  {
             res.sendStatus(500)
             // TODO log
         }
+    },
+    postCryptoWallet: (req: Request, res: Response) => {
+        try {
+            const bodyWallet = req.body
+            walletService.addCryptoToWallet(bodyWallet).then(result => {
+                res.json(result)
+            })
+        } catch (error) {
+            res.sendStatus(500)
+            // TODO log
+        }
     }
 }
