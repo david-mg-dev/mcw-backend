@@ -1,5 +1,5 @@
 import { Table, Column, Model } from 'sequelize-typescript'
-import { STRING, NUMBER, DATE } from 'sequelize'
+import { STRING, INTEGER, DATE } from 'sequelize'
 import { v4 as uuid } from 'uuid'
 
 @Table({
@@ -9,9 +9,10 @@ import { v4 as uuid } from 'uuid'
 })
 
 export class User extends Model {
+    
     @Column({
-        primaryKey: true,
         type: STRING,
+        primaryKey: true,
         field: 'user_id'
     })
     user_id: string = uuid()
@@ -41,7 +42,7 @@ export class User extends Model {
     fullname: string
 
     @Column({
-        type: NUMBER,
+        type: INTEGER,
         field: 'deposit'
     })
     deposit: number
