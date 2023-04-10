@@ -21,3 +21,13 @@ export class CryptoDto {
     stock: number
     icon: string
 }
+
+export class WalletDto {
+    wallet_id: string
+    user_id: string
+    crypto_id: string
+    amount: number
+    crypto?: CryptoDto
+}
+
+export type NewTransactionWalletDto = Omit<WalletDto, 'wallet_id'>
