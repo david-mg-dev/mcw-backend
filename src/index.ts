@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import UserRouter from './routes/user.routes'
 import CryptoRouter from './routes/crypto.routes'
+import WalletRouter from './routes/wallet.routes'
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ const port = process.env.PORT;
 
 app.use('/api/users', UserRouter)
 app.use('/api/cryptos', CryptoRouter)
+app.use('/api/wallet', WalletRouter)
 
 app.get('/ping', (_req: Request, res: Response) => {
   res.send('Pong!');
