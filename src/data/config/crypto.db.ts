@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize-typescript"
 import dotenv from 'dotenv'
 import { Crypto } from "../models/crypto.model"
+import { Wallet } from "../models/wallet.model"
 
 dotenv.config
 
@@ -37,7 +38,7 @@ const DB_DIALECT: any = 'postgres'
             idle: 5000
         }
     })
-    sequelize.addModels([Crypto])
+    sequelize.addModels([Crypto, Wallet])
 
     const db: any = {}
     db.Sequelize = Sequelize

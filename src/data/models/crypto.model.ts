@@ -1,6 +1,7 @@
-import { Table, Column, Model } from 'sequelize-typescript'
+import { Table, Column, Model, HasMany } from 'sequelize-typescript'
 import { STRING, INTEGER, DATE } from 'sequelize'
 import { v4 as uuid } from 'uuid'
+import { Wallet } from './wallet.model'
 
 @Table({
     freezeTableName: true,
@@ -58,6 +59,10 @@ export class Crypto extends Model {
         type: DATE
     })
     updatedAt: Date
+
+    @HasMany(() => Wallet)
+    wallets: Wallet[]
+    
 }
 
 
