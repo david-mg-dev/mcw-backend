@@ -1,4 +1,3 @@
-//import { NewUserDto } from "../types"
 import { UserRepository } from "../data/repositories/user.repository"
 import { User }  from "../data/models/user.model"
 
@@ -20,6 +19,7 @@ export class UserServices {
         })
         return userPromise
     }
+
 /*
     parseDto(userDto: NewUserDto): User {
         let user: User = new User()

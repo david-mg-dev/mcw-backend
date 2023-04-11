@@ -1,5 +1,4 @@
 import { UserRepository } from "../data/repositories/user.repository"
-//import { User } from '../data/models/user.model'
 import { AuthDto } from "../types"
 import { generateToken } from "../utils/jwt.handler"
 
@@ -12,12 +11,13 @@ export class AuthServices {
 
     async login(dataLogin: AuthDto): Promise<string> {
         const loginPromise = await this._userRepository.login(dataLogin).then(dataLogin => {
-            const token = generateToken(dataLogin)
-            return token
+                const token = generateToken(dataLogin)
+                return token
         }).catch(error => {
             console.error(error)
-            //throw new error
+            //return error
             // TODO 
+            //hrow new Error('Unable to log in. Please check your credentials and try again.')
         })
         return loginPromise
     }

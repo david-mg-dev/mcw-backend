@@ -44,20 +44,24 @@ export class UserRepository {
                     email: dataLogin.email
                 }
             })
-            if(!data == null) {
+            console.log(data)
+            if(data === null) {
                 //return "email not found" //TODO 
                 throw new Error('Email not Found')
             } 
-
+            
+            
             const isValidPass = await compare(dataLogin.password, data.password)
             if(!isValidPass) {
                 //return "PASSWORD INCORRECT" //TODO
                 throw new Error('Password Incorrect')
             }
 
+            return data.user_id
+
         } catch(error) {
             throw error
         }
-        return data.user_id
+      
     }
 }
