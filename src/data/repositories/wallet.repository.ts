@@ -38,7 +38,7 @@ export class WalletRepository {
     async addCryptoToWallet(dataWallet: Wallet): Promise<string> {
         try {
             const existCrypto = await this._walletRepository.findOne({
-                where: { crypto_id: dataWallet.crypto_id }   
+                where: { crypto_id: dataWallet.crypto_id, user_id: dataWallet.user_id }
             })
 
             if(existCrypto) {
@@ -86,7 +86,7 @@ export class WalletRepository {
             )
     
             await this._walletRepository.update({ amount: newDataBuy.amount + dataBuy.amount },
-                { where: { crypto_id: dataBuy.crypto_id } 
+                { where: { user_id: dataBuy.user_id, crypto_id: dataBuy.crypto_id } 
             })
             return "buy ok" // TODO
 
