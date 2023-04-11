@@ -52,4 +52,25 @@ export class WalletServices {
         }
         return walletDto
     } 
+
+    async buyCrypto(dataBuy: Wallet): Promise<any> {
+        const body = await this._walletRepository.buyCrypto(dataBuy).then(amount => {
+            return amount
+        }).catch(error => {
+            console.error(error) // TODO
+            throw error
+        })
+        return body
+    }
+
+    async sellCrypto(dataSell: Wallet): Promise<any> {
+        const body = await this._walletRepository.sellCrypto(dataSell).then(amount => {
+            return amount
+        }).catch(error => {
+            console.error(error) // TODO
+            throw error
+        })
+        return body
+    }
 }
+

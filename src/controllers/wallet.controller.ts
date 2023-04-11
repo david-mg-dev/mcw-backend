@@ -25,5 +25,26 @@ export const WalletController =  {
             res.sendStatus(500)
             // TODO log
         }
+    },
+    buyCryptos: (req: Request, res: Response) => {
+        try {
+            const bodyBuy = req.body
+            walletService.buyCrypto(bodyBuy).then(result => {
+                res.json(result)
+            })
+        } catch (error) {
+            res.sendStatus(500)
+            //TODO log
+        }
+    },
+    sellCryptos: (req: Request, res: Response) => {
+        try {
+            const bodySell = req.body
+            walletService.sellCrypto(bodySell).then(result => {
+                res.json(result)
+            })
+        } catch (error) {
+            res.sendStatus(500)
+        }
     }
 }
