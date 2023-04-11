@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import UserRouter from './routes/user.routes'
 import CryptoRouter from './routes/crypto.routes'
 import WalletRouter from './routes/wallet.routes'
+import cors from 'cors'
 
 dotenv.config();
 
@@ -11,6 +12,13 @@ app.use(express.json())
 
 const port = process.env.PORT;
 
+const allowedOrigins = ['http://localhost:4200']
+
+const option: cors.CorsOptions = {
+  origin: allowedOrigins
+}
+
+app.use(cors(option))
 app.use('/api/users', UserRouter)
 app.use('/api/cryptos', CryptoRouter)
 app.use('/api/wallet', WalletRouter)
