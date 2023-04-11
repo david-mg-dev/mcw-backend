@@ -4,22 +4,21 @@ import { AuthDto } from "../types"
 import { generateToken } from "../utils/jwt.handler"
 
 export class AuthServices {
-    _useRepository: UserRepository
+    _userRepository: UserRepository
 
     constructor() {
-        this._useRepository = new UserRepository()
+        this._userRepository = new UserRepository()
     }
 
     async login(dataLogin: AuthDto): Promise<string> {
-        const loginPromise = await this._useRepository.login(dataLogin).then(dataLogin => {
+        const loginPromise = await this._userRepository.login(dataLogin).then(dataLogin => {
             const token = generateToken(dataLogin)
             return token
         }).catch(error => {
             console.error(error)
-            throw error
+            //throw new error
             // TODO 
         })
-
         return loginPromise
     }
 }
