@@ -20,6 +20,16 @@ export class UserServices {
         return userPromise
     }
 
+    async getUserById(userId: string): Promise<User | undefined> {
+        const userPromise = await this._userRepository.getUserById(userId).then(data => {
+            return data
+        }).catch(error => {
+            console.error(error) // TODO
+            return undefined
+        })
+        return userPromise
+    }
+
 /*
     parseDto(userDto: NewUserDto): User {
         let user: User = new User()

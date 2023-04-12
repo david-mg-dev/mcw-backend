@@ -17,6 +17,7 @@ export const UserController = {
             // TODO log
         }
     },
+    /*
     login: (req: Request, res: Response) => {
         try {
             const dataLogin = req.body
@@ -24,6 +25,30 @@ export const UserController = {
                 res.json(result)
             })
         } catch(error) {
+            res.sendStatus(500)
+        }
+    }
+    */
+    login: (req: Request, res: Response) => {
+        try {
+            const dataLogin = req.body
+            authService.login(dataLogin).then(result => {
+                res.json(result)
+            }).catch(error => {
+                console.error(error) // TODO
+                res.status(401).send( { message: 'Invalid Credentials' })
+            })
+        } catch (error) {
+            res.sendStatus(500)
+        }
+    },
+    getUser: (req:Request, res: Response) => {
+        try {
+            const userId = req.params.id
+            userService.getUserById(userId).then(result => {
+                res.json(result)
+            })
+        } catch (error) {
             res.sendStatus(500)
         }
     }

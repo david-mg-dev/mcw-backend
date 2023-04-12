@@ -62,6 +62,21 @@ export class UserRepository {
         } catch(error) {
             throw error
         }
-      
+    }
+
+    async getUserById(userId: string): Promise<User | null> {
+        try {
+            const dataUser = await this._userRepository.findOne({
+                where: {
+                    user_id: userId
+                }
+            })
+            if(dataUser) {
+                return dataUser
+            }
+        } catch (error) {
+            console.error(error) // TODO
+        }
+        return null
     }
 }
