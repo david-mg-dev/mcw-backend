@@ -1,5 +1,6 @@
 import { WalletServices } from "../services/wallet.services"
 import { Request, Response } from 'express'
+import logger from "../utils/log.handler"
 
 const walletService: WalletServices = new WalletServices()
 
@@ -30,7 +31,11 @@ export const WalletController =  {
         try {
             const bodyBuy = req.body
             walletService.buyCrypto(bodyBuy).then(result => {
+                console.log(result)
                 res.json(result)
+            }).catch(error => {
+                logger.error({ message: error })
+                res.status(400).send({ message: 'Invalid Data Buy' })
             })
         } catch (error) {
             res.sendStatus(500)

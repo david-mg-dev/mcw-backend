@@ -1,7 +1,7 @@
 import { WalletRepository } from "../data/repositories/wallet.repository"
 import { Wallet } from "../data/models/wallet.model"
 import { WalletDto } from "../types"
-
+import logger from "../utils/log.handler"
 export class WalletServices {
     _walletRepository: WalletRepository
 
@@ -35,6 +35,25 @@ export class WalletServices {
         return body
     }
 
+    async buyCrypto(dataBuy: Wallet): Promise<string> {
+        try {
+            return await this._walletRepository.buyCrypto(dataBuy);
+        } catch (error) {
+            logger.error(error);
+            throw new Error('Invalid Data Buy');
+        }
+    }
+
+    async sellCrypto(dataSell: Wallet): Promise<any> {
+        const body = await this._walletRepository.sellCrypto(dataSell).then(amount => {
+            return amount
+        }).catch(error => {
+            console.error(error) // TODO
+            throw error
+        })
+        return body
+    }
+
     parseDto(wallet: Wallet): WalletDto {
         const walletDto: WalletDto = {
             wallet_id: wallet.dataValues.wallet_id,
@@ -52,25 +71,5 @@ export class WalletServices {
         }
         return walletDto
     } 
-
-    async buyCrypto(dataBuy: Wallet): Promise<any> {
-        const body = await this._walletRepository.buyCrypto(dataBuy).then(amount => {
-            return amount
-        }).catch(error => {
-            console.error(error) // TODO
-            throw error
-        })
-        return body
-    }
-
-    async sellCrypto(dataSell: Wallet): Promise<any> {
-        const body = await this._walletRepository.sellCrypto(dataSell).then(amount => {
-            return amount
-        }).catch(error => {
-            console.error(error) // TODO
-            throw error
-        })
-        return body
-    }
 }
 

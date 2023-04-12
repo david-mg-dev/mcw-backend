@@ -4,6 +4,7 @@ import { Crypto } from "../models/crypto.model"
 import { User } from "../models/user.model"
 import { user_connect } from "../config/user.db"
 import { WalletDto } from "../../types"
+import logger from "../../utils/log.handler"
 
 export class WalletRepository {
     _dbWallet: any = {}
@@ -62,17 +63,21 @@ export class WalletRepository {
             })
             const stockCrypto = (dataCrypto.stock - dataBuy.amount)
 
-            if(stockCrypto < 0)
-                return "stock insuficiente"
-
+            if(stockCrypto < 0) {
+                logger.error({message: 'Stock Insuficiente'}) // TODO info?
+                throw new Error('Stock Insuficiente')
+            }
+            
             const dataUser = await this._userRepository.findOne({
                 where: { user_id: dataBuy.user_id }
             })
             const userAmount = (dataUser.deposit - (dataBuy.amount * dataCrypto.value))
 
-            if(userAmount < 0)
-                return "deposito insuficiente"
-          
+            if(userAmount < 0) {
+                logger.error({ message: 'Deposito insuficiente' })
+                throw new Error('deposito insuficiente')
+            }
+
             const newDataBuy = await this._walletRepository.findOne({
                 where: { crypto_id: dataBuy.crypto_id }
             })
