@@ -3,6 +3,7 @@ import { User } from "../models/user.model"
 import { AuthDto } from "../../types"
 import { encrypt } from "../../utils/bcrypt.handler"
 import { compare } from "bcrypt"
+import logger from "../../utils/log.handler"
 
 export class UserRepository {
     _db: any = {}
@@ -46,17 +47,15 @@ export class UserRepository {
             })
             console.log(data)
             if(data === null) {
-                //return "email not found" //TODO 
+                logger.error({message: 'Email Not Found'})
                 throw new Error('Email not Found')
             } 
             
-            
             const isValidPass = await compare(dataLogin.password, data.password)
             if(!isValidPass) {
-                //return "PASSWORD INCORRECT" //TODO
+                logger.error({message: 'Password Incorrect'})
                 throw new Error('Password Incorrect')
             }
-
             return data.user_id
 
         } catch(error) {
