@@ -7,9 +7,10 @@
 
 
 
-# ENDPOINT
-- POST CreateUser [http://localhost:5000/api/users/create](http://localhost:5000/api/users/create)
+## ENDPOINT
+# POST CreateUser [http://localhost:5000/api/users/create](http://localhost:5000/api/users/create)
 
+- Body:
 ```json
 {
   "username": "Admin",
@@ -19,8 +20,13 @@
   "deposit": 1000 
 }
 ```
+RESPONSE: 
+201 - Created OK
 
-- POST LoginUser [http://localhost:5000/api/users/login](http://localhost:5000/api/users/login)
+# POST LoginUser [http://localhost:5000/api/users/login](http://localhost:5000/api/users/login)
+
+
+BODY:
 
 ```json
 {
@@ -29,7 +35,17 @@
 }
 ```
 
-- POST AddCryptoToWallet [http://localhost:5000/api/wallet/a](http://localhost:5000/api/wallet/all/461913e6-35c2-4983-aad5-779858fdd314)dd
+RESPONSE:
+
+```json
+{
+ "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZWNjMTQyZGQtNDYwOC00MTQzLWExOTgtNmMxOTdhNDY3MDhhIiwiaWF0IjoxNjgxMzY0NDYwLCJleHAiOjE2ODEzNjgwNjB9.VSQ8YgJOI_mK_BfAByKxyNt4L1tEwwwLfKdxsPot4g0"
+}
+```
+
+# POST AddCryptoToWallet http://localhost:5000/api/wallet/add 
+
+BODY:
 
 ```json
 {
@@ -40,7 +56,9 @@
 }
 ```
 
-- POST BuyCrypto http://localhost:5000/api/wallet/buy
+# POST BuyCrypto http://localhost:5000/api/wallet/buy
+
+BODY:
 
 ```json
 {
@@ -50,7 +68,9 @@
 }
 ```
 
-- POST SellCrypto http://localhost:5000/api/wallet/sell 
+# POST SellCrypto http://localhost:5000/api/wallet/sell 
+
+BODY:
 
 ```json
 {
@@ -59,7 +79,12 @@
     "amount": 100
 }
 ```
-- GET GetWalletUser http://localhost:5000/api/wallet/all/1e287c11-265f-41bc-98a3-6ef0085c1d34
+# GET GetWalletUser http://localhost:5000/api/wallet/all/:id
+PARAMS:
+- id User
+
+RESPONSE:
+
 ```json
   {
     "wallet_id": "7cbbf0b3-ac7c-49a5-a011-599404928c85",
