@@ -1,6 +1,5 @@
 import { Table, Column, Model } from 'sequelize-typescript'
 import { STRING, INTEGER, DATE } from 'sequelize'
-import { v4 as uuid } from 'uuid'
 
 @Table({
     freezeTableName: true,
@@ -15,7 +14,7 @@ export class User extends Model {
         primaryKey: true,
         field: 'user_id'
     })
-    user_id: string = uuid()
+    user_id: string 
 
     @Column({
         type: STRING,

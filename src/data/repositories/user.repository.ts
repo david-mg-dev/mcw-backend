@@ -4,6 +4,7 @@ import { AuthDto } from "../../types"
 import { encrypt } from "../../utils/bcrypt.handler"
 import { compare } from "bcrypt"
 import logger from "../../utils/log.handler"
+import { v4 as uuid } from 'uuid'
 
 export class UserRepository {
     _db: any = {}
@@ -27,6 +28,7 @@ export class UserRepository {
             const passHash = await encrypt(newUser.password)
 
             newUser.password = passHash
+            newUser.user_id = uuid()
 
             newUser = await this._userRepository.create(newUser)
             return newUser.user_id
