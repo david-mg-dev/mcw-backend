@@ -35,7 +35,14 @@ export const WalletController =  {
                 res.json(result)
             }).catch(error => {
                 logger.error({ message: error })
-                res.status(400).send({ message: 'Invalid Data Buy' })
+                if(error.message === 'Stock Insuficiente') {
+                    res.status(400).send({ message: error.message })
+                } else if(error.message === 'deposito insuficiente'){
+                    res.status(400).send({ message: error.message })
+                } else {
+                    console.log(error.message)
+                    res.status(500).send({ message: 'Error Transaccion' })
+                }     
             })
         } catch (error) {
             res.sendStatus(500)

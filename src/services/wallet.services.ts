@@ -40,7 +40,7 @@ export class WalletServices {
             return await this._walletRepository.buyCrypto(dataBuy);
         } catch (error) {
             logger.error(error);
-            throw new Error('Invalid Data Buy');
+            throw new Error(error.message);           
         }
     }
 
