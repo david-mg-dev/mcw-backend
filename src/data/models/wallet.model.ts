@@ -1,6 +1,5 @@
 import { Table, Column, Model, ForeignKey, BelongsTo } from 'sequelize-typescript'
 import { STRING, INTEGER, DATE } from 'sequelize'
-import { v4 as uuid } from 'uuid'
 import { Crypto } from './crypto.model'
 
 @Table({
@@ -16,7 +15,7 @@ export class Wallet extends Model {
         primaryKey: true,
         field: 'wallet_id'
     })
-    wallet_id: string = uuid()
+    wallet_id: string  
 
     @Column({
         type: STRING,

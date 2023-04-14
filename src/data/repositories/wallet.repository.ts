@@ -5,6 +5,7 @@ import { User } from "../models/user.model"
 import { user_connect } from "../config/user.db"
 import { WalletDto } from "../../types"
 import logger from "../../utils/log.handler"
+import { v4 as uuid } from 'uuid'
 
 export class WalletRepository {
     _dbWallet: any = {}
@@ -45,6 +46,7 @@ export class WalletRepository {
             if(existCrypto) {
                 console.log('Esta crypto ya esta agregada') // TODO 
             } else {
+                dataWallet.wallet_id = uuid()
                 const newCryptoWallet = await this._walletRepository.create(dataWallet) 
                 console.log(newCryptoWallet)   // TODO  Por defecto amount=0
             }
@@ -96,7 +98,7 @@ export class WalletRepository {
             return "buy ok" // TODO
 
         } catch (error) {
-            return error
+            throw error
         }
     }
 
