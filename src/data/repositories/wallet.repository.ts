@@ -47,8 +47,8 @@ export class WalletRepository {
                 console.log('Esta crypto ya esta agregada') // TODO 
             } else {
                 dataWallet.wallet_id = uuid()
-                const newCryptoWallet = await this._walletRepository.create(dataWallet) 
-                console.log(newCryptoWallet)   // TODO  Por defecto amount=0
+                dataWallet.amount = 0
+                return await this._walletRepository.create(dataWallet) 
             }
             return dataWallet.user_id
 
