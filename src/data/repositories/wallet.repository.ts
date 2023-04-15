@@ -66,7 +66,7 @@ export class WalletRepository {
             const stockCrypto = (dataCrypto.stock - dataBuy.amount)
 
             if(stockCrypto < 0) {
-                logger.error({message: 'Stock Insuficiente'}) // TODO info?
+                logger.error({message: 'Stock Insuficiente'}) 
                 throw new Error('Stock Insuficiente')
             }
             
@@ -114,7 +114,7 @@ export class WalletRepository {
             })
 
             if(dataSell.amount > newDataSell.amount)
-                return "amount insuficiente"
+                throw new Error('amount insuficiente')
                 
             const amountCrypto = (dataCrypto.stock + dataSell.amount)
 
@@ -137,7 +137,7 @@ export class WalletRepository {
             return "sell ok" // TODO 
 
         } catch (error) {
-            return error  // TODO
+            throw error  
         }
     }
 }

@@ -37,13 +37,23 @@ export class WalletServices {
 
     async buyCrypto(dataBuy: Wallet): Promise<string> {
         try {
-            return await this._walletRepository.buyCrypto(dataBuy);
+            return await this._walletRepository.buyCrypto(dataBuy)
         } catch (error) {
-            logger.error(error);
-            throw new Error(error.message);           
+            logger.error(error)
+            throw new Error(error.message)          
         }
     }
 
+    async sellCrypto(dataSell: Wallet): Promise<string> {
+        try {
+            return await this._walletRepository.sellCrypto(dataSell)
+        } catch (error) {
+            logger.error(error)
+            throw new Error(error.message)
+        }
+    }
+
+    /*
     async sellCrypto(dataSell: Wallet): Promise<any> {
         const body = await this._walletRepository.sellCrypto(dataSell).then(amount => {
             return amount
@@ -53,7 +63,7 @@ export class WalletServices {
         })
         return body
     }
-
+*/
     parseDto(wallet: Wallet): WalletDto {
         const walletDto: WalletDto = {
             wallet_id: wallet.dataValues.wallet_id,

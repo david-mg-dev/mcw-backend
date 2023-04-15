@@ -54,6 +54,9 @@ export const WalletController =  {
             const bodySell = req.body
             walletService.sellCrypto(bodySell).then(result => {
                 res.json(result)
+            }).catch(error => {
+                logger.error({ message: error })
+                res.status(400).send({ message: error.message })
             })
         } catch (error) {
             res.sendStatus(500)
